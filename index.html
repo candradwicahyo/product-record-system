@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.2/sweetalert2.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Product Record System</title>
+</head>
+<body>
+  
+  <!-- container start -->
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md">
+        
+        <!-- button and search input start -->
+        <div class="row">
+          <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div class="col-md mt-2">
+              
+              <!-- button start -->
+              <button 
+                class="btn btn-primary rounded-0" 
+                data-bs-toggle="modal" 
+                data-bs-target="#modalForm">
+                Add Product
+              </button>
+              <button 
+                class="btn btn-danger rounded-0 btn-del-all">
+                Delete All Product
+              </button>
+              <!-- button end -->
+              
+            </div>
+            <div class="col-md-4 mt-2">
+              
+              <!-- search input start -->
+              <input type="text" class="form-control search-input" placeholder="Enter product ...">
+              <!-- search input end -->
+              
+            </div>
+          </div>
+        </div>
+        <!-- button and search input end -->
+        
+        <!-- table wrapper start -->
+        <div class="table-responsive my-3">
+          
+          <!-- table start -->
+          <table class="table" cellspacing="0">
+            <thead class="bg-dark text-white">
+              <tr>
+                <th class="fw-normal p-3">No</th>
+                <th class="fw-normal p-3">Product Name</th>
+                <th class="fw-normal p-3">Price</th>
+                <th class="fw-normal p-3">Action</th>
+              </tr>
+            </thead>
+            <tbody class="table-container"></tbody>
+          </table>
+          <!-- table end -->
+          
+        </div>
+        <!-- table wrapper end -->
+        
+        <!-- form modal start -->
+        <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-6 fw-light" id="exampleModalLabel">Modal Form</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              
+              <!-- form wrapper start -->
+              <form action="" class="form-wrapper">
+                <div class="modal-body">
+                  
+                  <!-- input form start -->
+                  <div class="form-group mb-3">
+                    <label for="product-name" class="form-label">Product Name</label>
+                    <input type="text" id="product-name" class="form-control input-product">
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="product-price" class="form-label">Product Price</label>
+                    <input type="number" id="product-price" class="form-control input-price">
+                  </div>
+                  <div class="form-group">
+                    <label for="product-description" class="form-label">Product Description</label>
+                    <textarea id="product-description" cols="30" rows="8" class="form-control input-description"></textarea>
+                  </div>
+                  <!-- input form end -->
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary btn-submit rounded-0">Add Product</button>
+                </div>
+              </form>
+              <!-- form wrapper end -->
+              
+            </div>
+          </div>
+        </div>
+        <!-- form modal end -->
+        
+        <!-- modal detail product start -->
+        <div class="modal fade" id="modalDetailProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-6 fw-light" id="exampleModalLabel">Modal Detail Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                
+                <!-- modal container start -->
+                <div class="modal-container p-3"></div>
+                <!-- modal container end -->
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-1" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal detail product end -->
+        
+      </div>
+    </div>
+  </div>
+  <!-- container end -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.2/sweetalert2.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
