@@ -10,6 +10,17 @@ window.addEventListener("DOMContentLoaded", () => {
   const tableContainer = document.querySelector('.table-container');
   const modalContainer = document.querySelector('.modal-container');
   
+  // clear modal
+  document.addEventListener('click', event => {
+    if (event.target.classList.contains('btn-modal')) {
+      const type = event.target.dataset.type.toLowerCase();
+      if (type.includes('add')) {
+        buttonSubmit.innerText = 'Add Product';
+        clear();
+      }
+    }
+  });
+  
   // button submit 
   const buttonSubmit = document.querySelector('.btn-submit');
   buttonSubmit.addEventListener("click", addProduct);
@@ -20,10 +31,8 @@ window.addEventListener("DOMContentLoaded", () => {
       const data = getInputValues();
       if (validate(data)) {
         if (isDataExist(data)) return alerts('error', 'Data is already in the list!');
-        convertToCurrency(data);
         tasks.unshift(data);
         setLocalstorage('product', tasks);
-        showUI(data);
         alerts('success', 'New Product Has Been Added!');
         loadData();
         clear();
@@ -39,10 +48,10 @@ window.addEventListener("DOMContentLoaded", () => {
     };
   }
   
-  function convertToCurrency(data) {
-    const result = Number(data.price);
-    data.price = result.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
-    return data;
+  function convertToCurrency(param) {
+    const result = parseFloat(param);
+    param = result.toLocaleString('US', { style: 'currency', currency: 'USD' });
+    return param;
   }
   
   function validate({ product, price, description }) {
@@ -78,7 +87,7 @@ window.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(name, JSON.stringify(value));
   }
   
-  function showUI(data, index = 0) {
+  function showUI(data, index) {
     const result = renderElement(data, index);
     tableContainer.insertAdjacentHTML('beforeend', result);
   }
@@ -88,7 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <tr>
         <td class="fw-light p-3">${index + 1}</td>
         <td class="fw-light p-3">${product}</td>
-        <td class="fw-light p-3">${price}</td>
+        <td class="fw-light p-3">${convertToCurrency(price)}</td>
         <td class="fw-light p-3">
           <button 
             class="btn btn-success btn-sm rounded-0 btn-edit m-1" 
@@ -98,7 +107,8 @@ window.addEventListener("DOMContentLoaded", () => {
             edit
           </button>
           <button 
-            class="btn btn-warning btn-sm rounded-0 btn-detail m-1" 
+            class="btn btn-warning btn-sm rounded-0 btn-detail m-1 btn-modal" 
+            data-type="edit"
             data-index="${index}"
             data-bs-toggle="modal"
             data-bs-target="#modalDetailProduct">detail</button>
@@ -201,11 +211,11 @@ window.addEventListener("DOMContentLoaded", () => {
         const data = getInputValues();
         if (validate(data)) {
           if (isDataExist(data)) return alerts('error', 'Data Is Already In The List!');
-          convertToCurrency(data);
           tasks[index] = data;
           setLocalstorage('product', tasks);
           alerts('success', 'Product Has Been Updated!');
           loadData();
+          clear();
           buttonSubmit.textContent = 'Add Product';
           index = null;
         }
@@ -224,7 +234,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function detailProduct({ product, price, description }) {
     return `
       <h1 class="fw-normal">${product}</h1>
-      <h3 class="fw-light mb-4">${price}</h3>
+      <h3 class="fw-light mb-4">${convertToCurrency(price)}</h3>
       <p class="fw-light">${description}</p>
     `;
   }
